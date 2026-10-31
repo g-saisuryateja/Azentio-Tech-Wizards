@@ -1,0 +1,40 @@
+# Detection and scoring rules configuration
+# Weights, thresholds, and risk bands are defined here.
+# Edit via PUT /api/v1/config/rules — changes take effect on the next /detect/run.
+
+scoring:
+  risk_bands:
+    low:    [0, 39]
+    medium: [40, 69]
+    high:   [70, 100]
+  combination_bonus: 10
+
+indicators:
+  large_transfer:
+    weight: 20
+    threshold_amount: 10000
+
+  failed_logins:
+    weight: 15
+    threshold_count: 5
+
+  new_device:
+    weight: 10
+
+  beneficiary_change:
+    weight: 15
+
+  shared_device:
+    weight: 20
+
+  loan_stacking:
+    weight: 20
+    threshold_applications: 3
+
+mitigations:
+  regular_large_transfer:
+    weight: 10
+    lookback_days: 90
+
+  family_shared_phone:
+    weight: 10
